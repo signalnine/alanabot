@@ -1,4 +1,4 @@
-# Limbo
+# Alanabot
 ### A [Slack](https://slack.com/) chatbot
 
 ![](https://travis-ci.org/llimllib/limbo.svg?branch=master)
