@@ -22,7 +22,7 @@ def beep():
     return response
 
 def random_response():
-    responses = ['ssanborn--', 'YAY', 'omg', ':heart:', ':smile:', 'gnats!', ':woop:', ':toot:', ':shoe:']
+    responses = ['ssanborn--', 'YAY', 'adorbs', 'omg', ':sumo:', ':heart:', ':smile:', 'gnats!', ':woop:', ':toot:', ':shoe:']
     return random.choice(responses)
 
 def random_vote(username):
@@ -31,6 +31,9 @@ def random_vote(username):
 
 def will():
     return "Will wasn't even born yet."
+
+def maths():
+    return "NO MATHS ALLOWED"
 
 def on_message(msg, server):
     user = server.slack.server.users.find(msg["user"])
@@ -45,6 +48,9 @@ def on_message(msg, server):
     match = re.findall(r"(sushi|sashimi|tuna|maguro)(.*)?", text)
     if match:
        return sushi()
+    match = re.findall(r"(\d+)(.*)?(\+|\-|\*|\\)(.*)?(\d+)", text)
+    if match:
+       return maths()
     match = re.findall(r"\b(80s|90s|back when|long time|ago|the days|19\d{2}|20\d{2}\b)", text)
     if match:
        return will()
