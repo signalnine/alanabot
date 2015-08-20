@@ -10,30 +10,42 @@ def downvote(username):
     return response
 
 def sushi():
-    response = "I hate sushi."
-    return response
+    responses = ["I hate sushi.", "Ew"]
+    return random.choice(responses)
 
 def compost():
-    response = "Don't forget to compost!"
-    return response
+    responses = ["Don't forget to compost!", "No paper towels in the recycling!"]
+    return random.choice(responses)
 
 def beep():
-    response = "`beep boop`"
-    return response
+    responses = ["`beep boop`", "`initiating launch sequence..`", "`error`", "`I'm sorry, I can't do that, Dave.`"]
+    return random.choice(responses)
 
 def random_response():
-    responses = ['ssanborn--', 'YAY', 'adorbs', 'omg', ':sumo:', ':heart:', ':smile:', 'gnats!', ':woop:', ':toot:', ':shoe:']
+    responses = ['ssanborn--', 'YAY', 'adorbs', 'omg', ':sumo:', ':heart:', ':smile:', 'gnats!', ':woop:', ':toot:', ':shoe:', 'Alana misses you.']
     return random.choice(responses)
 
 def random_vote(username):
     vote = ['++', "--", "++", "++"]
     return username + random.choice(vote)
 
+def random_favorite(username):
+    return "You're my favorite " + username
+
 def will():
     return "Will wasn't even born yet."
 
 def maths():
     return "NO MATHS ALLOWED"
+
+def flipflop(text):
+    match = re.findall(r"\+\+", text)
+    if match:
+       return "flip.flopper--"
+    return "flip.flopper++"
+
+def luff(match):
+    return "I luff " + match + "s!"
 
 def on_message(msg, server):
     user = server.slack.server.users.find(msg["user"])
@@ -57,11 +69,19 @@ def on_message(msg, server):
     match = re.findall(r"\b(activate|engage|dothething|initiate)(.*)?", text)
     if match:
        return beep()
+    match = re.findall(r"(flip\.flopper)(--|\+\+)", text)
+    if match:
+       return flipflop(text)
     match = re.findall(r"\b(apple|watermelon|peach|pear|banana|strawberr(i|y)|cucumber|berr(i|y)|leftover|pie|pizza|carrot|bean|corn|pea|nectarine|grape|donut|trash|recycle|recycling|chip|cake|cookie)e*s*\b", text)
     if match:
        return compost()
+    match = re.findall(r"\b(brussels sprout|rainbow|color|luff)", text)
+    if match:
+       return luff(match[0])
     if (random.random() < 0.05):
        return random_response()
     if (random.random() < 0.01):
        return random_vote(username)
+    if (random.random() < 0.01):
+       return random_favorite(username)
     return
