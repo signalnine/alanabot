@@ -35,9 +35,6 @@ def random_favorite(username):
 def will():
     return "Will wasn't even born yet."
 
-def maths():
-    return "NO MATHS ALLOWED"
-
 def flipflop(text):
     match = re.findall(r"\+\+", text)
     if match:
@@ -64,9 +61,6 @@ def on_message(msg, server):
     match = re.findall(r"(sushi|sashimi|tuna|maguro)(.*)?", text)
     if match:
        return sushi()
-    match = re.findall(r"([-+]?[0-9]*\.?[0-9]+[\/\+\-\*])+([-+]?[0-9]*\.?[0-9]+)", text)
-    if match:
-       return maths()
     match = re.findall(r"\b(80s|90s|back when|long time|ago|the days|19\d{2}|20\d{2}\b)", text)
     if match:
        return will()

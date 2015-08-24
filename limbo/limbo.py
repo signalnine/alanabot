@@ -96,6 +96,7 @@ def handle_message(event, server):
 
     botname = server.slack.server.login_data["self"]["name"]
     msguser = server.slack.server.users.find(event["user"])
+#    channelname = server.slack.server.channel["name"]
 
     # slack returns None if it can't find the user because it thinks it's ruby
     if not msguser:
@@ -105,6 +106,9 @@ def handle_message(event, server):
     # don't respond to ourself or slackbot
     if msguser.name == botname or msguser.name.lower() == "slackbot":
         return
+ 
+#    if channelname == "#workstuff":
+#        return
 
     return "\n".join(run_hook(server.hooks, "message", event, server))
 
